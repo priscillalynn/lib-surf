@@ -1,8 +1,35 @@
-import React from 'react'
+import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
+import './navbar.css'
+import logoImg from '../../assets/bookicon.png'
+import {HiOutlineMenuAlt3} from 'react-icons/hi'
 
 const Navbar = () => {
+  const [toggleMenu, setToggleMenu] = useState(false);
+  const handleNavbar = () => setToggleMenu(!toggleMenu);
+
   return (
-    <div>Navbar</div>
+    <nav className='navbar' id = "navbar">
+      <div className='container navbar-content flex'>
+        <div className='brand-and-toggler flex flex-sb'>
+          <Link to = '/' className='navbar-brand flex'>
+            <img src = {logoImg} alt = "site logo" />
+            <span className='text-uppercase fw-7 fs-24 ls-1'>LibSurf</span>
+          </Link>
+          <button type = "button" className='navbar-toggler-btn' onClick={handleNavbar}><HiOutlineMenuAlt3 size = {25} style = {{ color: `${toggleMenu ? "#fff" : "#010101"}` }} /></button>
+        </div>
+        <div className={toggleMenu ? "navbar-collapse show-navbar-collapse" : "navbar-collapse"}>
+          <ul className = "navbar-nav">
+            <li className='nav-item'>
+              <Link to = "book" className='nav-link text-uppercase text-white fs-22 fw-6 ls-1'>Home</Link>
+              <li className='nav-item'>
+              <Link to = "about" className='nav-link text-uppercase text-white fs-22 fw-6 ls-1'>About</Link>
+              </li>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   )
 }
 
